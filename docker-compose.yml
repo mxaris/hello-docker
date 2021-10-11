@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+    mysql:
+        image: mysql:5.7.19
+        container_name: Database
+        restart: always
+        environment:
+          MYSQL_ROOT_PASSWORD: rootPassword
+          MYSQL_DATABASE: tododb
+          MYSQL_USER: todoUser
+          MYSQL_PASSWORD: todoPassword        
+#        volumes:
+#            - db_data:/var/lib/mysql
+        ports:
+            - 3307:3306
+    api:
+        build: .
+        container_name: API
+        depends_on:
+            - mysql
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/tododb?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATASOURCE_USERNAME=todoUser
+            - SPRING_DATASOURCE_PASSWORD=todoPassword
+            - SPRING_JPA_HIBERNATE_DDL-AUTO=create-drop
+            - APP_MYVARIABLE=Hello from docker
+        ports:
+            - 9090:9090
+#volumes:
+#    db_data: {}
