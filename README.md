@@ -76,7 +76,7 @@ services:
 ## How to build ##
 Download the project or better clone it
 
-`git clone git@bitbucket.org:iconteamdevs/hello-docker.git`
+`git clone git@github.com:mxaris/hello-docker.git`
 
 Inside the project's folder compose it with the following command:
 
